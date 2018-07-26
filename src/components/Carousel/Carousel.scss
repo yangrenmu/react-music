@@ -1,0 +1,23 @@
+@import '~slick-carousel/slick/slick.css';
+@import '~slick-carousel/slick/slick-theme.css';
+.slider-wrap {
+  .slider {
+    position: relative;
+    width: 100%;    
+    .slider-content {
+      position: relative;
+      overflow: hidden;
+      .image {
+        width: 100%;        
+      }
+    }
+    .slick-dots {
+      bottom: 5px;
+      .slick-active button {
+        &:before {
+          color: rgba(230, 30, 30, 0.8);
+        }
+      }
+    }
+  }
+}

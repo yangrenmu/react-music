@@ -1,0 +1,37 @@
+.tab {
+  .tab-wrapper {
+    display: flex;
+    height: 50px;
+    line-height: 50px;
+    text-align: center;
+    .tab-item {
+      flex: 1;
+      font-size: 18px;
+      color: rgb(79, 79, 79);
+      &:active {
+        background: #f0f0f0;
+      }
+    }
+    .selected {
+      @extend .tab-item;
+      color: rgb(240, 20, 20);
+    }
+  }
+  .border-bottom {
+    display: block;
+    margin-top: -2px;
+    width: 25%;
+    height: 2px;
+    background: rgb(240, 20, 20);
+    transition: all 0.3s ease;
+    &.songs {
+      transform: translate3d(100%, 0, 0);
+    }
+    &.radios {
+      transform: translate3d(200%, 0, 0);
+    }
+    &.rankings {
+      transform: translate3d(300%, 0, 0);
+    }
+  }
+}

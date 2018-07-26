@@ -1,0 +1,11 @@
+.recommend-songs {
+  width: 100%;
+  .recommend-songs-header {
+    height: 40px;
+    line-height: 40px;
+    .recommend-songs-text {
+      padding: 0 0 0 10px;
+      border-left: 2px solid rgb(230, 20, 20);
+    }
+  }  
+}
