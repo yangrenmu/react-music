@@ -1,5 +1,5 @@
 const musicListIdAction = (data) => {
-  console.log('action')
+  // console.log('action')
   return { type: 'MUSIC_LIST_ID', data}
 }
 const musicIdAction = (data) => {

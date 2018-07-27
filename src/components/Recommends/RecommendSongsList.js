@@ -16,7 +16,7 @@ class RecommendSongsList extends React.Component {
   }
 
   showPlayList(id) {
-    console.log(id)
+    // console.log(id)
     this.props.dispatchAction(musicListIdAction(id))
   }
 

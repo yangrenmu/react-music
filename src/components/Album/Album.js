@@ -1,19 +1,31 @@
 import React from 'react'
-import { connect } from 'react-redux'
+import AlbumHeader from './AlbumHeader/AlbumHeader.js'
 import './Album.scss'
 
 class Album extends React.Component {
+  constructor(props) {
+    super(props)
+    this.state = {
+      data: {}
+    }
+  }
+  
   render() {
-    const musicListId = this.props.musicListId
-    console.log(this.props)
-    return <div className="album">{musicListId + '-' + this.props.musicId}</div>
+    const data = this.state.data
+    // console.log(data)
+    return (
+      <div className="album">
+        <AlbumHeader />
+      </div>
+    )
   }
 }
 
-export default connect(state => {
-  console.log(state)
-  return {
-    musicListId: state.musicListIds.musicListId,
-    musicId: state.musicIds.musicId
-  }
-})(Album)
+export default Album
+
+// export default connect(state => {
+//   // console.log(state)
+//   return {
+//     musicListId: state.musicListIds.musicListId
+//   }
+// })(Album)

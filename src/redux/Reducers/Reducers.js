@@ -1,7 +1,7 @@
 import { combineReducers } from 'redux'
 
 const musicListIds = (state = { musicListId: '' }, action) => {
-  console.log('reducer1')
+  // console.log('reducer1')
   switch (action.type) {
     case 'MUSIC_LIST_ID':
       state.musicListId = action.data
@@ -11,7 +11,7 @@ const musicListIds = (state = { musicListId: '' }, action) => {
   }
 }
 const musicIds = (state = { musicId: '' }, action) => {
-  console.log('reducer2')
+  // console.log('reducer2')
   switch (action.type) {
     case 'MUSIC_ID':
       state.musicId = action.data
