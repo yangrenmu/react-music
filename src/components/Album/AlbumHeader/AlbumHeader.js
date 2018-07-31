@@ -18,6 +18,7 @@ class AlbumHeader extends React.Component {
       commentCount: 0,
       shareCount: 0
     }
+    this.back = this.back.bind(this)
   }
 
   componentDidMount() {
@@ -27,7 +28,7 @@ class AlbumHeader extends React.Component {
     const musicListId = localStorage.getItem('musicListId')
     console.log(musicListId)
     axios
-      .get('http://localhost:5000/playlist/detail?id=' + musicListId)
+      .get('http://192.168.102.74:5000/playlist/detail?id=' + musicListId)
       .then(res => {
         // console.log(res.data.playlist)
         const playlist = res.data.playlist
@@ -37,7 +38,7 @@ class AlbumHeader extends React.Component {
           coverImg: playlist.coverImgUrl,
           playCount: playlist.playCount,
           name: playlist.name,
-          avatar: creator.avatarUrl,
+          avatar: creator.avatarUrl,  
           nickname: creator.nickname,
           subscribedCount: playlist.subscribedCount,
           commentCount: playlist.commentCount,
@@ -46,8 +47,12 @@ class AlbumHeader extends React.Component {
       })
   }
 
+  back() {
+    this.props.history.goBack()
+  }
+
   render() {
-    console.log(this.state.playlist)
+    console.log(this.props)
     // const playlist = this.state.playlist
     const text = this.state.description
     // console.log(text)
@@ -55,7 +60,7 @@ class AlbumHeader extends React.Component {
       <div className="AlbumHeader">
         <section className="header">
           <div className="header-back">
-            <i className="icon-back" />
+            <i onClick={this.back} className="icon-back" />
             <div className="text-wrapper">
               <div className="text">歌单</div>
               <div className="editor">
@@ -69,32 +74,33 @@ class AlbumHeader extends React.Component {
             <i className="icon-omit" />
           </div>
         </section>
-        <section className="cover">
+        <section className="cover-section">
           <div className="mask" />
+          <div className="mask1" />
           <div className="background">
             <img className="image" src={this.state.coverImg} alt="" />
           </div>
-          <div className="cover-info">
-            <img className="image" src={this.state.coverImg} alt="" />
-            <div className="playCount">
-              <i className="icon-headset" />
-              <span className="count">
-                {this.state.playCount > 9999
-                  ? (this.state.playCount / 10000).toFixed(0) + '万'
-                  : this.state.playCount}
-              </span>
+          <div className="cover">
+            <div className="cover-info">
+              <img className="image" src={this.state.coverImg} alt="" />
+              <div className="playCount">
+                <i className="icon-headset" />
+                <span className="count">
+                  {this.state.playCount > 9999
+                    ? (this.state.playCount / 10000).toFixed(0) + '万'
+                    : this.state.playCount}
+                </span>
+              </div>
             </div>
-          </div>
-          <div className="user-info">
-            <span className="list-info">{this.state.name}</span>
             <div className="user-info">
-              <img className="image" src={this.state.avatar} alt="" />
-              <span className="usernick">{this.state.nickname}</span>
-              <i className="icon-exceed" />
+              <span className="list-info">{this.state.name}</span>
+              <div className="user-info">
+                <img className="image" src={this.state.avatar} alt="" />
+                <span className="usernick">{this.state.nickname}</span>
+                <i className="icon-exceed" />
+              </div>
             </div>
           </div>
-        </section>
-        <section>
           <div className="icon-wrapper">
             <div className="collect bottom">
               <i className="icon-collect icon" />

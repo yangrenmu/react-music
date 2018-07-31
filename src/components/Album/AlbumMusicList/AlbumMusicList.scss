@@ -1,0 +1,100 @@
+.music-list {
+  width: 100%;
+  .play-all {
+    display: flex;
+    justify-content: space-between;
+    height: 60px;
+    line-height: 60px;
+    background: -webkit-gradient(
+        linear,
+        left top,
+        left bottom,
+        color-stop(0.5, transparent),
+        color-stop(0.5, #c8c7cc),
+        to(#c8c7cc)
+      )
+      left bottom repeat-x;
+    background-size: 100% 1px;
+    .play {
+      color: rgb(40, 40, 40);
+      .icon-pause {
+        padding: 0 18px;
+        font-size: 24px;
+        &::before {
+          vertical-align: bottom;
+        }
+      }
+      .track-count {
+        color: rgb(140, 140, 140);
+      }
+    }
+    .choices {
+      align-self: flex-end;
+      margin-right: 10px;
+      color: rgb(60, 60, 60);
+      .icon-choices {
+        padding: 0 6px;
+      }
+    }
+  }
+  .tracks {
+    height: 70px;
+    line-height: 70px;
+    display: flex;
+    .index {
+      flex: 0 0 60px;
+      text-align: center;
+      color: rgb(140, 140, 140);
+    }
+    .tracks-info {
+      width: calc(100% - 100px);
+      flex: 1;
+      display: flex;
+      justify-content: space-between;
+      text-decoration: none;
+      color: rgb(60, 60, 60);
+      background: -webkit-gradient(
+          linear,
+          left top,
+          left bottom,
+          color-stop(0.5, transparent),
+          color-stop(0.5, #c8c7cc),
+          to(#c8c7cc)
+        )
+        left bottom repeat-x;
+      background-size: 100% 1px;
+      .info {
+        width: calc(100% - 40px);
+        flex: 1;
+        .tracks-name {
+          width: 100%;
+          display: block;
+          height: 44px;
+          line-height: 44px;
+          font-size: 18px;
+          white-space: nowrap;
+          text-overflow: ellipsis;
+          overflow: hidden;
+        }
+        .singer-name {
+          display: block;
+          width: 100%;
+          height: 26px;
+          line-height: 14px;
+          font-size: 14px;
+          color: rgb(140, 140, 140);
+          white-space: nowrap;
+          text-overflow: ellipsis;
+          overflow: hidden;
+        }
+      }
+      .icon-omit {
+        width: 40px;
+        text-align: center;
+        transform: rotate(90deg);
+        font-size: 28px;
+        color: rgb(140, 140, 140);
+      }
+    }
+  }
+}

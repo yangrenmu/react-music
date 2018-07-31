@@ -1,7 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
-import {musicListIdAction, musicIdAction} from '../../redux/Action/Actions.js'
+import {musicListIdAction} from '../../redux/Action/Actions.js'
 import './RecommendSongsList.scss'
 
 import axios from 'axios'
@@ -16,12 +16,11 @@ class RecommendSongsList extends React.Component {
   }
 
   showPlayList(id) {
-    // console.log(id)
     this.props.dispatchAction(musicListIdAction(id))
   }
 
   componentDidMount() {
-    axios.get('http://localhost:5000/personalized').then(Res => {
+    axios.get('http://192.168.102.74:5000/personalized').then(Res => {
       let res = Res.data.result.slice(0, 6)
       // console.log(res)
       this.setState({ playLists: res })
@@ -62,8 +61,7 @@ class RecommendSongsList extends React.Component {
 
 const mapStateToProps = state => {
   return {
-    musicListIds: state.musicListId,
-    musicIds: state.musicId
+    musicListIds: state.musicListId
   }
 }
 const mapDispatchToProps = dispatch => {

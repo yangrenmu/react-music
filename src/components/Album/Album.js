@@ -1,31 +1,18 @@
 import React from 'react'
 import AlbumHeader from './AlbumHeader/AlbumHeader.js'
+import AlbumMusicList from './AlbumMusicList/AlbumMusicList.js'
 import './Album.scss'
 
 class Album extends React.Component {
-  constructor(props) {
-    super(props)
-    this.state = {
-      data: {}
-    }
-  }
-  
   render() {
-    const data = this.state.data
-    // console.log(data)
+    console.log(this.props)
     return (
       <div className="album">
-        <AlbumHeader />
+        <AlbumHeader history={this.props.history}/>
+        <AlbumMusicList />
       </div>
     )
   }
 }
 
 export default Album
-
-// export default connect(state => {
-//   // console.log(state)
-//   return {
-//     musicListId: state.musicListIds.musicListId
-//   }
-// })(Album)

@@ -18,14 +18,12 @@ class RecommendExclusive extends React.Component {
       })
     })
   }
-  showMusicMenu() {}
   render() {
     const exclusive = this.state.exclusive.map((item, index) => {
       if (index > 0) {
         return (
           <div
             key={index}
-            onClick={() => this.showMusicMenu()}
             className="content"
           >
             <div className="image-wrapper">
