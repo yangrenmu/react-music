@@ -3,9 +3,8 @@ import Slider from 'react-slick'
 import './Carousel.scss'
 
 export default class Carousel extends React.Component {
-  
   render() {
-    let settings = {
+    const settings = {
       dots: true,
       infinite: true,
       autoplay: true,

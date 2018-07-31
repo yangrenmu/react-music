@@ -10,16 +10,19 @@ class RecommendExclusive extends React.Component {
       exclusive: []
     }
   }
+
   componentDidMount() {
-    axios.get('http://localhost:5000/personalized/privatecontent').then(res => {
+    axios.get('http://localhost:5000/personalized/privatecontent').then((res) => {
       // console.log(res)
       this.setState({
         exclusive: res.data.result
       })
     })
   }
+
   render() {
-    const exclusive = this.state.exclusive.map((item, index) => {
+    const { exclusive } = this.state
+    const exclusives = exclusive.map((item, index) => {
       if (index > 0) {
         return (
           <div
@@ -30,12 +33,21 @@ class RecommendExclusive extends React.Component {
               <img className="image" src={item.picUrl} alt="" />
             </div>
             <i className="icon-dynamicPlay" />
-            <span className="text">{item.name}</span>
+            <span className="text">
+              {item.name}
+            </span>
           </div>
         )
       }
+      return (
+        <div />
+      )
     })
-    return <div className="recommend-exclusive">{exclusive}</div>
+    return (
+      <div className="recommend-exclusive">
+        {exclusives}
+      </div>
+    )
   }
 }
 export default RecommendExclusive

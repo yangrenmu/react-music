@@ -22,24 +22,22 @@ class AlbumHeader extends React.Component {
   }
 
   componentDidMount() {
-    if (this.props.musicListId) {
-      localStorage.setItem('musicListId', this.props.musicListId)
+    const { musicListId } = this.props
+    if (musicListId) {
+      localStorage.setItem('musicListId', musicListId)
     }
-    const musicListId = localStorage.getItem('musicListId')
-    console.log(musicListId)
+    const localMusicListId = localStorage.getItem('musicListId')
     axios
-      .get('http://192.168.102.74:5000/playlist/detail?id=' + musicListId)
-      .then(res => {
-        // console.log(res.data.playlist)
-        const playlist = res.data.playlist
-        const creator = playlist.creator
+      .get(`http://192.168.102.74:5000/playlist/detail?id=${localMusicListId}`)
+      .then((res) => {
+        const { playlist } = res.data
         this.setState({
           description: playlist.description.split('。')[0],
           coverImg: playlist.coverImgUrl,
           playCount: playlist.playCount,
           name: playlist.name,
-          avatar: creator.avatarUrl,  
-          nickname: creator.nickname,
+          avatar: playlist.creator.avatarUrl,
+          nickname: playlist.creator.nickname,
           subscribedCount: playlist.subscribedCount,
           commentCount: playlist.commentCount,
           shareCount: playlist.shareCount
@@ -48,24 +46,35 @@ class AlbumHeader extends React.Component {
   }
 
   back() {
-    this.props.history.goBack()
+    const { history } = this.props
+    history.goBack()
   }
 
   render() {
-    console.log(this.props)
     // const playlist = this.state.playlist
-    const text = this.state.description
+    const {
+      description, coverImg, playCount, name, avatar, nickname, subscribedCount, commentCount, shareCount
+    } = this.state
+    // const text = this.state.description
     // console.log(text)
     return (
       <div className="AlbumHeader">
         <section className="header">
           <div className="header-back">
-            <i onClick={this.back} className="icon-back" />
+            <i className="icon-back" onClick={this.backClick} />
             <div className="text-wrapper">
-              <div className="text">歌单</div>
+              <div className="text">
+                <span>
+                  歌单
+                </span>
+              </div>
               <div className="editor">
-                <span className="editor-text">编辑推荐：</span>
-                <span className="move-text">{text}</span>
+                <span className="editor-text">
+                  编辑推荐：
+                </span>
+                <span className="move-text">
+                  {description}
+                </span>
               </div>
             </div>
           </div>
@@ -78,25 +87,29 @@ class AlbumHeader extends React.Component {
           <div className="mask" />
           <div className="mask1" />
           <div className="background">
-            <img className="image" src={this.state.coverImg} alt="" />
+            <img className="image" src={coverImg} alt="" />
           </div>
           <div className="cover">
             <div className="cover-info">
-              <img className="image" src={this.state.coverImg} alt="" />
+              <img className="image" src={coverImg} alt="" />
               <div className="playCount">
                 <i className="icon-headset" />
                 <span className="count">
-                  {this.state.playCount > 9999
-                    ? (this.state.playCount / 10000).toFixed(0) + '万'
-                    : this.state.playCount}
+                  {playCount > 9999
+                    ? `${(playCount / 10000).toFixed(0)}万`
+                    : playCount}
                 </span>
               </div>
             </div>
             <div className="user-info">
-              <span className="list-info">{this.state.name}</span>
+              <span className="list-info">
+                {name}
+              </span>
               <div className="user-info">
-                <img className="image" src={this.state.avatar} alt="" />
-                <span className="usernick">{this.state.nickname}</span>
+                <img className="image" src={avatar} alt="" />
+                <span className="usernick">
+                  {nickname}
+                </span>
                 <i className="icon-exceed" />
               </div>
             </div>
@@ -104,19 +117,27 @@ class AlbumHeader extends React.Component {
           <div className="icon-wrapper">
             <div className="collect bottom">
               <i className="icon-collect icon" />
-              <span className="text">{this.state.subscribedCount}</span>
+              <span className="text">
+                {subscribedCount}
+              </span>
             </div>
             <div className="discuss bottom">
               <i className="icon-comment icon" />
-              <span className="text">{this.state.commentCount}</span>
+              <span className="text">
+                {commentCount}
+              </span>
             </div>
             <div className="share bottom">
               <i className="icon-share icon" />
-              <span className="text">{this.state.shareCount}</span>
+              <span className="text">
+                {shareCount}
+              </span>
             </div>
             <div className="download bottom">
               <i className="icon-download icon" />
-              <span className="text">下载</span>
+              <span className="text">
+                下载
+              </span>
             </div>
           </div>
         </section>
@@ -126,9 +147,6 @@ class AlbumHeader extends React.Component {
 }
 
 // export default AlbumHeader
-export default connect(state => {
-  // console.log(state)
-  return {
-    musicListId: state.musicListIds.musicListId
-  }
-})(AlbumHeader)
+export default connect(state => ({
+  musicListId: state.musicListIds.musicListId
+}))(AlbumHeader)

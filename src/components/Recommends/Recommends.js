@@ -5,24 +5,29 @@ import RecommendExclusive from './RecommendExclusive.js'
 import './Recommends.scss'
 
 class Recommends extends React.Component {
-
   render() {
     return (
       <div>
         <Carousel />
         <div className="recommend-songs">
           <div className="recommend-songs-header">
-            <span className="recommend-songs-text">推荐歌单</span>
-            <i className="icon-exceed"/>
+            <span className="recommend-songs-text">
+              {'推荐歌单'}
+            </span>
+            <i className="icon-exceed" />
           </div>
           <div className="recommend-songs-list">
-            <div><RecommendSongsList/></div>
+            <div>
+              <RecommendSongsList />
+            </div>
           </div>
           <div className="recommend-songs-header">
-            <span className="recommend-songs-text">独家放送</span>
-            <i className="icon-exceed"/>
+            <span className="recommend-songs-text">
+              {'独家放送'}
+            </span>
+            <i className="icon-exceed" />
           </div>
-          <RecommendExclusive/>
+          <RecommendExclusive />
         </div>
       </div>
     )

@@ -61,7 +61,7 @@ module.exports = {
         "no-bitwise": ["error", {
             "allow": ["~"]
         }],
-        "no-console": 2,
+        "no-console": 1,
         "no-plusplus": 2,
         "no-unused-expressions": ["error", { "allowShortCircuit": true, "allowTernary": true }],
         "import/no-unresolved": 0,
@@ -76,6 +76,9 @@ module.exports = {
         "no-param-reassign": ["error", {
             "props": false
         }],
-        "object-shorthand": 0
+        "object-shorthand": 0,
+        //自己添加
+        "jsx-a11y/click-events-have-key-events": 0,
+        "jsx-a11y/media-has-caption": 0
     },
   };

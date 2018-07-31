@@ -9,11 +9,11 @@ export default class Header extends React.Component {
         <div className="icon-wrapper">
           <i className="icon-menu" />
           <div className="icon-middle">
-            <i className="icon-music"></i>
+            <i className="icon-music" />
             <i className="icon-wangyi" />
             <i className="icon-friend" />
           </div>
-          <i className="icon-search"></i>
+          <i className="icon-search" />
         </div>
         <Tab />
       </div>

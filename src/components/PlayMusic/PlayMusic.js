@@ -2,11 +2,13 @@ import React from 'react'
 import { connect } from 'react-redux'
 import axios from 'axios'
 import './PlayMusic.scss'
+import recordImg from '../../static/image/record.png'
+import microphoneImg from '../../static/image/microphone.png'
+
 
 class PlayMusic extends React.Component {
   constructor(props) {
     super(props)
-    this.refAudio = React.createRef()
     this.state = {
       songs: {
         name: '',
@@ -19,74 +21,91 @@ class PlayMusic extends React.Component {
       totalTime: '00:00',
       musicUrl: ''
     }
+    this.refAudio = React.createRef()
   }
+
   componentDidMount() {
-    if (this.props.musicId) {
-      localStorage.setItem('musicId', this.props.musicId)
+    const { musicId } = this.props
+    if (musicId) {
+      localStorage.setItem('musicId', musicId)
     }
-    const musicId = localStorage.getItem('musicId')
-    axios
-      .get('http://192.168.102.74:5000/song/detail?ids=' + musicId)
-      .then(res => {
-        console.log(res)
-        this.setState({
-          songs: res.data.songs[0]
+    const localMusicId = localStorage.getItem('musicId')
+    if (localMusicId) {
+      axios
+        .get(`http://192.168.102.74:5000/song/detail?ids=${localMusicId}`)
+        .then((res) => {
+          // console.log(res)
+          this.setState({
+            songs: res.data.songs[0]
+          })
         })
-      })
-    axios
-      .get('http://192.168.102.74:5000/music/url?id=' + musicId)
-      .then(res => {
-        const musicInfo = res.data.data[0]
-        const totalTime = (musicInfo.size * 8) / musicInfo.br
-        console.log(musicInfo)
-        this.setState({
-          musicUrl: musicInfo.url
+      axios
+        .get(`http://192.168.102.74:5000/music/url?id=${localMusicId}`)
+        .then((res) => {
+          const musicInfo = res.data.data[0]
+          // const totalTime = (musicInfo.size * 8) / musicInfo.br
+          // console.log(musicInfo)
+          this.setState({
+            musicUrl: musicInfo.url
+          })
         })
-      })
-      console.log(this.refAudio.current)
-      this.refAudio.current.play()
+    }
+  }
+
+  controlPlay() {
+    this.refAudio.current.pause()
   }
 
   render() {
-    console.log(this.props.musicId)
+    // console.log(this.props.musicId)
+    const {
+      songs, currentTime, totalTime, musicUrl
+    } = this.state
     const styles = {
-      backgroundImage: `url(${require('../../static/image/record.png')})`,
+      backgroundImage: `url(${recordImg})`,
       backgroundSize: 'contain',
       backgroundRepeat: 'no-repeat'
     }
-    
+
     return (
       <div className="play-music">
         <div className="background">
           <div className="mask" />
           <div className="mask1" />
           <div className="image-wrapper">
-            <img className="image" src={this.state.songs.al.picUrl} alt="" />
+            <img className="image" src={songs.al.picUrl} alt="" />
           </div>
         </div>
+
         <section className="header">
           <i className="icon-back" />
           <div className="title">
             <div className="songs-name">
-              <span className="songs-name-text">{this.state.songs.name}</span>
+              <span className="songs-name-text">
+                {songs.name}
+              </span>
             </div>
-            <span className="singer-name">{this.state.songs.ar[0].name}</span>
+            <span className="singer-name">
+              {songs.ar[0].name}
+            </span>
           </div>
           <i className="icon-share" />
         </section>
+
         <section className="jukebox">
           <div className="record-wrapper">
             <img
               className="microphone"
-              src={require('../../static/image/microphone.png')}
+              src={microphoneImg}
               alt=""
             />
             <div className="record-content">
               <div className="record" style={styles} />
-              <img className="cover" src={this.state.songs.al.picUrl} alt="" />
+              <img className="cover" src={songs.al.picUrl} alt="" />
             </div>
           </div>
         </section>
+
         <section className="play-wrapper">
           <div className="icon-wrapper">
             <i className="icon-enshrine" />
@@ -95,33 +114,47 @@ class PlayMusic extends React.Component {
             <i className="icon-omit" />
           </div>
           <div className="progress">
-            <span className="current-time">{this.state.currentTime}</span>
+            <span className="current-time">
+              {currentTime}
+            </span>
             <div className="line">
               <span className="total-bar" />
               <span className="current-bar" />
               <span className="dot" />
             </div>
-            <span className="total-time">{this.state.totalTime}</span>
+            <span className="total-time">
+              {totalTime}
+            </span>
           </div>
           <div className="play-control">
             <i className="icon-circulation" />
             <div className="control">
               <i className="icon-pre" />
-              <i className="icon-play" />
+              <i onClick={() => this.controlPlay()} className="icon-play" />
               <i className="icon-next" />
             </div>
             <i className="icon-list" />
           </div>
         </section>
-        <audio ref={this.refAudio} src={this.state.musicUrl}></audio>
+        <audio
+          ref={this.refAudio}
+          autoPlay
+          src={musicUrl}
+        />
       </div>
+
     )
   }
 }
 
-// export default PlayMusic
-export default connect(state => {
-  return {
-    musicId: state.musicIds.musicId
-  }
-})(PlayMusic)
+const mapStateToProps = state => ({
+  musicId: state.musicIds.musicId
+  // playState: state.controlPlay.playState
+})
+const mapDispatchToProps = dispatch => ({
+  dispatchAction: action => dispatch(action)
+})
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(PlayMusic)

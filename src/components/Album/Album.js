@@ -5,10 +5,12 @@ import './Album.scss'
 
 class Album extends React.Component {
   render() {
-    console.log(this.props)
+    // console.log(this.props)
+    const { history } = this.props
+
     return (
       <div className="album">
-        <AlbumHeader history={this.props.history}/>
+        <AlbumHeader history={history} />
         <AlbumMusicList />
       </div>
     )
