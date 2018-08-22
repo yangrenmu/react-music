@@ -18,15 +18,20 @@ class AlbumHeader extends React.Component {
       commentCount: 0,
       shareCount: 0
     }
-    this.back = this.back.bind(this)
+    // this.back = this.back.bind(this)
   }
 
   componentDidMount() {
+    // const { history } = this.props
+    // if (history) {
+    //   localStorage.setItem('albumHistory', JSON.stringify(history))
+    // }
     const { musicListId } = this.props
     if (musicListId) {
       localStorage.setItem('musicListId', musicListId)
     }
     const localMusicListId = localStorage.getItem('musicListId')
+    console.log(localMusicListId)
     axios
       .get(`http://192.168.102.74:5000/playlist/detail?id=${localMusicListId}`)
       .then((res) => {
@@ -45,8 +50,10 @@ class AlbumHeader extends React.Component {
       })
   }
 
-  back() {
+  backClick() {
+    // const albumHistory = JSON.parse(localStorage.getItem('albumHistory'))
     const { history } = this.props
+    console.log(history)
     history.goBack()
   }
 
@@ -61,7 +68,7 @@ class AlbumHeader extends React.Component {
       <div className="AlbumHeader">
         <section className="header">
           <div className="header-back">
-            <i className="icon-back" onClick={this.backClick} />
+            <i className="icon-back" onClick={() => this.backClick()} />
             <div className="text-wrapper">
               <div className="text">
                 <span>

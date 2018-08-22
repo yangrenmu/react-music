@@ -20,7 +20,8 @@ class RecommendSongsList extends React.Component {
   }
 
   componentDidMount() {
-    axios.get('http://192.168.102.74:5000/personalized').then((Res) => {
+    // http://192.168.102.74
+    axios.get('http://localhost:5000/personalized').then((Res) => {
       const res = Res.data.result.slice(0, 6)
       // console.log(res)
       this.setState({ playLists: res })

@@ -40,7 +40,7 @@ class RecommendExclusive extends React.Component {
         )
       }
       return (
-        <div />
+        <div key={index}/>
       )
     })
     return (

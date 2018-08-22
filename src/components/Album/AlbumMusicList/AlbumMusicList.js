@@ -1,8 +1,12 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
+// import { Link } from 'react-router-dom'
 import { connect } from 'react-redux'
 import axios from 'axios'
-import { musicIdAction } from '../../../redux/Action/Actions.js'
+import {
+  musicIdAction, albumAction, currentIndexAction, showPlayMusicAction
+} from '../../../redux/Action/Actions.js'
+import PlayMusic from '../../PlayMusic/PlayMusic.js'
+// import MiniPlay from '../../MiniPlay/MiniPlay.js'
 import './AlbumMusicList.scss'
 
 class AlbumMusicList extends React.Component {
@@ -15,6 +19,7 @@ class AlbumMusicList extends React.Component {
   }
 
   componentDidMount() {
+    console.log('2')
     const musicListId = localStorage.getItem('musicListId')
     axios
       .get(`http://192.168.102.74:5000/playlist/detail?id=${musicListId}`)
@@ -27,9 +32,13 @@ class AlbumMusicList extends React.Component {
       })
   }
 
-  playMusic(id) {
+  playMusic(id, currentIndex) {
     const { dispatchAction } = this.props
+    const { tracks } = this.state
     dispatchAction(musicIdAction(id))
+    dispatchAction(currentIndexAction(currentIndex))
+    dispatchAction(albumAction(tracks))
+    dispatchAction(showPlayMusicAction(true))
   }
 
   render() {
@@ -39,9 +48,8 @@ class AlbumMusicList extends React.Component {
         <span className="index">
           {index + 1}
         </span>
-        <Link
-          to="/album/play"
-          onClick={() => this.playMusic(items.id)}
+        <div
+          onClick={() => this.playMusic(items.id, index)}
           className="tracks-info"
         >
           <div className="info">
@@ -52,8 +60,11 @@ class AlbumMusicList extends React.Component {
               {`${items.ar[0].name}-${items.al.name}`}
             </span>
           </div>
-          <i className="icon-omit" />
-        </Link>
+          <div className="icon-wrapper">
+            <i className="icon-omit" />
+          </div>
+
+        </div>
       </div>
     ))
     return (
@@ -76,6 +87,8 @@ class AlbumMusicList extends React.Component {
           </div>
         </div>
         {track}
+        {/* <MiniPlay /> */}
+        <PlayMusic />
       </div>
     )
   }

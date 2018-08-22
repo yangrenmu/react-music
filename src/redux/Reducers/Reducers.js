@@ -1,4 +1,5 @@
 import { combineReducers } from 'redux'
+import { Object } from 'core-js';
 
 const musicListIds = (state = { musicListId: '' }, action) => {
   // console.log('reducer1')
@@ -20,14 +21,39 @@ const musicIds = (state = { musicId: '' }, action) => {
     return state
   }
 }
-const controlPlays = (state = { playState: '' }, action) => {
+const playStates = (state = { playState: 'playing' }, action) => {
+  // console.log(action)
   switch (action.type) {
-  case 'CONTROLPLAY':
-    state.playState = action.data
-    return state
+  case 'PLAYSTATE':
+    return Object.assign({}, { playState: action.data })
   default:
     return state
   }
 }
+const updateIndexs = (state = {}, action) => {
+  // console.log(action.type)
+  switch (action.type) {
+  case 'UPDATE_INDEX':
+    return Object.assign({}, { currentIndex: action.data })
+  default:
+    return state
+  }
+}
+const albums = (state = { album: {} }, action) => {
+  switch (action.type) {
+  case 'ALBUM':
+    return Object.assign({}, { album: action.data })
+  default: return state
+  }
+}
+const showPlayMusics = (state = { showPlayMusic: false }, action) => {
+  switch (action.type) {
+  case 'SHOWPLAYMUSIC':
+    return Object.assign({}, { showPlayMusic: action.data })
+  default: return state
+  }
+}
 
-export default combineReducers({ musicListIds, musicIds, controlPlays })
+export default combineReducers({
+  musicListIds, musicIds, playStates, updateIndexs, albums, showPlayMusics
+})

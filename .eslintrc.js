@@ -1,11 +1,12 @@
 module.exports = {
     // 指定校验的ECMAScript的版本及特性
     "parserOptions": {
-      "ecmaVersion": 7, // ECMAScript版本，7为ES7
+      "ecmaVersion": 6, // ECMAScript版本，7为ES7
       "sourceType": "module", //默认script，如果代码是ECMAScript模块，设置为module
       "ecmaFeatures": { // 使用额外的语言特性
           "jsx": true // 启用JSX
-      }
+      },
+      "target": "ES6"
     },
     // 当访问未定义的变量时，no-undef 规则将发出警告
     // 指定脚本的运行环境。每种环境都有一组特定的预定义全局变量

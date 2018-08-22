@@ -1,214 +1,254 @@
-.play-music {
-  position: absolute;
+.hide-play-music {
+  display: none;
+}
+.play-music-wrapper {
+  position: fixed;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  .background {
+  z-index: 10;
+  .play-music {
     position: absolute;
+    top: 0;
+    left: 0;
     width: 100%;
     height: 100%;
-    .mask {
+    .background {
       position: absolute;
       width: 100%;
       height: 100%;
-      background: rgba(20, 20, 20, 0.3);
-      z-index: 1;
-    }
-    .mask1 {
-      position: absolute;
-      width: 100%;
-      height: 100%;
-      background: #fff;
-      z-index: 0;
-    }
-    .image-wrapper {
-      position: relative;
-      width: 100%;
-      max-width: 700px;
-      height: 100%;
-      z-index: 0;
-      .image {
+      .mask {
+        position: absolute;
+        width: 100%;
         height: 100%;
+        background: rgba(20, 20, 20, 0.3);
+        z-index: 11;
+      }
+      .mask1 {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        background: #fff;
+        z-index: 10;
+      }
+      .image-wrapper {
+        position: relative;
         width: 100%;
         max-width: 700px;
-        filter: blur(40px);
-      }
-    }
-  }
-  .header {
-    position: relative;
-    display: inline-flex;
-    width: 100%;
-    height: 70px;
-    line-height: 70px;
-    justify-content: space-between;
-    color: #fff;
-    z-index: 2;
-    &:before {
-      content: '';
-      position: absolute;
-      bottom: 0;
-      width: 100%;
-      height: 1px;
-      z-index: 20;
-      background: radial-gradient(#ffffff -100%, rgba(200, 200, 200, 0) 80%);
-    }
-    .icon-back {
-      flex: 0 0 50px;
-      text-align: center;
-      font-size: 24px;
-    }
-    .title {
-      flex: 1;
-      .songs-name {
-        height: 30px;
-        line-height: 30px;
-        font-size: 0px;
-        padding: 10px 0 0px 0;
-        .songs-name-text {
-          font-size: 18px;
-        }
-      }
-      .singer-name {
-        display: block;
-        height: 30px;
-        line-height: 30px;
-        color: rgba(214, 214, 214, 1);
-      }
-    }
-    .icon-share {
-      width: 50px;
-      text-align: center;
-      font-size: 28px;
-    }
-  }
-  .jukebox {
-    position: relative;
-    z-index: 2;
-    .record-wrapper {
-      position: relative;
-      width: 100%;
-      text-align: center;
-      overflow: hidden;
-      .microphone {
-        position: absolute;
-        top: -16px;
-        left: 44.4%;
-        height: 140px;
-        z-index: 5;
-      }
-      .record-content {
-        position: relative;
-        display: inline-block;
-        width: 70%;
-        max-width: 400px;
-        margin-top: 70px;     
-        .record {
-          position: absolute;
-          width: 100%;
+        height: 100%;
+        z-index: 10;
+        .image {
           height: 100%;
-          z-index: 4;
-        }
-        .cover {       
           width: 100%;
-          box-sizing: border-box;
-          padding: 10px;
-          border-radius: 50%;
-          z-index: 3;
+          max-width: 700px;
+          filter: blur(40px);
         }
       }
     }
-  }
-  .play-wrapper {
-    position: absolute;
-    bottom: 0;
-    width: 100%;
-    z-index: 1;
-    .icon-wrapper {
+    .header {
+      position: relative;
       display: flex;
-      padding: 0 50px;
+      width: 100%;
+      height: 70px;
+      line-height: 70px;
+      justify-content: space-between;
       color: #fff;
-      i {
-        flex: 1;
+      z-index: 12;
+      &:before {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        width: 100%;
+        height: 1px;
+        z-index: 16;
+        background: radial-gradient(#ffffff -100%, rgba(200, 200, 200, 0) 80%);
+      }
+      .icon-back {
+        flex: 0 0 50px;
         text-align: center;
         font-size: 24px;
       }
-      .icon-omit {
-        transform: rotate(90deg);
-      }
-    }
-    .progress {
-      display: flex;
-      height:70px;
-      line-height: 70px;
-      color: rgba(200, 200, 200, 1);
-      // align-items: center;
-      .current-time {
-        flex: 0 0 60px;
-        text-align: center;
-        font-size: 14px;
-      }
-      .line {
-        position: relative;
+      .title {
+        width: calc(100% - 100px);
         flex: 1;
-        height: 70px;
-        line-height: 70px;
-        .total-bar {
-          display: inline-block;
+        .songs-name-text {
           width: 100%;
-          vertical-align: super;
-          height: 0px;
-          border: solid rgba(200, 200, 200, 1) 1px;
+          display: block;
+          height: 44px;
+          line-height: 44px;
+          font-size: 18px;
+          white-space: nowrap;
+          text-overflow: ellipsis;
+          overflow: hidden;
         }
-        .current-bar {
-          position: absolute;
-          left: 0;
-          top: 33px;
-          width: 50%;
-          height: 0;
-          border: solid rgba(200, 20, 20, 1) 1px;
-        }
-        .dot {
-          position: absolute;
-          top: 29px;
-          left: 10px;
-          width: 10px;
-          height: 10px;
-          background: #fff;
-          border-radius: 50%;
+        .singer-name {
+          display: block;
+          height: 30px;
+          margin: -5px 0 0 0;
+          line-height: 30px;
+          color: rgba(214, 214, 214, 1);
         }
       }
-      .total-time {
-        flex: 0 0 60px;
-        text-align: center;
-        font-size: 14px;
-      }
-    }
-    .play-control {
-      display: flex;
-      width: 100%;
-      height: 40px;
-      line-height: 40px;
-      margin: 0 0 30px 0;
-      color: rgba(240, 240, 240, 1);
-      .icon-circulation, .icon-list {
-        flex: 0 0 50px;
+      .icon-share {
+        // flex: 0 0 50px;
+        width: 50px;
         text-align: center;
         font-size: 28px;
       }
-      .control {
-        flex: 1;
-        height: 40px;        
+    }
+    .jukebox {
+      position: relative;
+      z-index: 12;
+      .record-wrapper {
+        position: relative;
+        width: 100%;
         text-align: center;
-        .icon-pre, .icon-next {
+        overflow: hidden;
+        .microphone {
+          position: absolute;
+          top: -16px;
+          left: 44.4%;
+          height: 140px;
+          z-index: 15;
+          transform: rotate(-26deg);
+          transform-origin: 17.39% 11.59%;
+          transition: all 0.5s;
+          &.microphonePlay {
+            transform: rotate(0deg);
+            transform-origin: 17.39% 11.59%;
+            transition: all 0.5s;
+          }
+        }
+        .record-content {
+          position: relative;
+          display: inline-block;
+          width: 70%;
+          max-width: 400px;
+          margin-top: 70px;
+          .record {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            z-index: 14;
+          }
+          .cover {
+            width: 100%;
+            box-sizing: border-box;
+            padding: 10px;
+            border-radius: 50%;
+            z-index: 13;
+            @keyframes rotateOne {
+              0% {
+                transform: rotate(0deg);
+              }
+              100% {
+                transform: rotate(360deg);
+              }
+            }
+            animation: rotateOne 40s linear infinite;
+            &.cover-pause {
+              animation-play-state: paused;
+            }
+          }
+        }
+      }
+    }
+    .play-wrapper {
+      position: absolute;
+      bottom: 0;
+      width: 100%;
+      z-index: 11;
+      .icon-wrapper {
+        display: flex;
+        padding: 0 50px;
+        color: #fff;
+        i {
+          flex: 1;
+          text-align: center;
+          font-size: 24px;
+        }
+        .icon-omit {
+          transform: rotate(90deg);
+        }
+      }
+      .progress {
+        display: flex;
+        height: 70px;
+        line-height: 70px;
+        color: rgba(200, 200, 200, 1);
+        // align-items: center;
+        .current-time {
+          flex: 0 0 60px;
+          text-align: center;
+          font-size: 14px;
+        }
+        .line {
+          position: relative;
+          flex: 1;
+          height: 70px;
+          line-height: 70px;
+          .total-bar {
+            display: inline-block;
+            width: 100%;
+            vertical-align: super;
+            height: 0px;
+            border: solid rgba(200, 200, 200, 1) 1px;
+          }
+          .current-bar {
+            position: absolute;
+            left: 0;
+            top: 33px;
+            width: 50%;
+            height: 0;
+            border: solid rgba(200, 20, 20, 1) 1px;
+          }
+          .dot {
+            position: absolute;
+            top: 29px;
+            left: 10px;
+            width: 10px;
+            height: 10px;
+            background: #fff;
+            border-radius: 50%;
+          }
+        }
+        .total-time {
+          flex: 0 0 60px;
+          text-align: center;
+          font-size: 14px;
+        }
+      }
+      .play-control {
+        display: flex;
+        width: 100%;
+        height: 40px;
+        line-height: 40px;
+        margin: 0 0 30px 0;
+        color: rgba(240, 240, 240, 1);
+        .icon-circulation,
+        .icon-list {
+          flex: 0 0 50px;
+          text-align: center;
           font-size: 28px;
         }
-        .icon-play {
-          font-size: 32px;
-          padding: 0 30px;
+        .control {
+          flex: 1;
+          height: 40px;
+          text-align: center;
+          .icon-pre,
+          .icon-next {
+            font-size: 28px;
+            padding: 0 15px;
+          }
+          .icon-play,
+          .icon-pause {
+            font-size: 32px;
+            padding: 0 15px;
+          }
         }
       }
     }
   }
 }
+

@@ -1,5 +1,6 @@
 .music-list {
   width: 100%;
+  background: rgba(245, 245, 245, 1);
   .play-all {
     display: flex;
     justify-content: space-between;
@@ -65,7 +66,7 @@
       background-size: 100% 1px;
       .info {
         width: calc(100% - 40px);
-        flex: 1;
+        // flex: 1;
         .tracks-name {
           width: 100%;
           display: block;
@@ -88,13 +89,20 @@
           overflow: hidden;
         }
       }
-      .icon-omit {
-        width: 40px;
+      .icon-wrapper {
+        padding-left: 10px;
         text-align: center;
-        transform: rotate(90deg);
-        font-size: 28px;
-        color: rgb(140, 140, 140);
+        overflow: hidden;
+        .icon-omit {
+          font-size: 28px;
+          color: rgb(140, 140, 140);
+          &:before {
+            display: inline-block;
+            transform: rotate(90deg);
+          }
+        }
       }
+      
     }
   }
 }

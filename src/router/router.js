@@ -6,7 +6,7 @@ import Songs from '../components/Songs/Songs.js'
 import Radios from '../components/Radios/Radios.js'
 import Rankings from '../components/Rankings/Rankings.js'
 import Album from '../components/Album/Album.js'
-import PlayMusic from '../components/PlayMusic/PlayMusic.js'
+// import PlayMusic from '../components/PlayMusic/PlayMusic.js'
 
 export default class Routers extends React.Component {
   render() {
@@ -22,8 +22,9 @@ export default class Routers extends React.Component {
               <Route path="/radios" component={Radios} />
               <Route path="/rankings" component={Rankings} />
               <Route exact path="/album" component={Album} />
-              <Route path="/album/play" component={PlayMusic} />
+              {/* <Route path="/album/play" component={PlayMusic} /> */}
             </Switch>
+
           </div>
         </Router>
       </div>
